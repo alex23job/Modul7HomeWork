@@ -51,6 +51,10 @@ namespace DB_ConsoleApp
             }
         }
 
+        /// <summary>
+        /// Получение по некоторым критериям информации о сотрудниках
+        /// </summary>
+        /// <param name="repos">экземпляр класса Repository</param>
         private static void CustomInfo(Repository repos)
         {
             string strInput = "";
@@ -82,6 +86,10 @@ namespace DB_ConsoleApp
             }
         }
 
+        /// <summary>
+        /// Удаление сотрудника по его идентификатору
+        /// </summary>
+        /// <param name="rep">экземпляр класса Repository</param>
         private static void DeleteWorkerByID(Repository rep)
         {
             Console.WriteLine("\nУдаление данных сотрудника по его идентификатору: \n");
@@ -103,25 +111,10 @@ namespace DB_ConsoleApp
             }
         }
 
-        static void PrintList()
-        {
-            string[] records = GetAllRecords(fileName);
-            if (records != null)
-            {
-                string outPatern = "| {0, -2} | {1, -16} | {2, -30} | {3, -4} | {4, -4} | {5, 10} | {6, -16} | {7, -12} |";
-                if (records.Length > 0)
-                {
-                    Console.WriteLine("\nСписок сотрудников\n");
-                    Console.WriteLine(outPatern, "ID", "Запись создана", "Ф. И. О.", "Возр", "Рост", "День рожд.", "Место рождения", "Должность");
-                    foreach (string rec in records)
-                    {
-                        Worker wp = new Worker(rec, '#');
-                        Console.WriteLine(wp.OutFormatString(outPatern));
-                    }
-                }
-            }
-        }
-
+        /// <summary>
+        /// Заполнение информацмм для добавления новой записи
+        /// </summary>
+        /// <param name="rep">экземпляр класса Repository</param>
         static void InputInfo(Repository rep)
         {
             Worker wp = new Worker();
@@ -152,6 +145,10 @@ namespace DB_ConsoleApp
             rep.Add(wp);
         }
 
+        /// <summary>
+        /// Получение данных сотрудника по его идентификатору
+        /// </summary>
+        /// <param name="rep">экземпляр класса Repository</param>
         static void GetInfoByID(Repository rep)
         {
             Console.WriteLine("\nПолучение данных сотрудника по его идентификатору: \n");
@@ -169,15 +166,6 @@ namespace DB_ConsoleApp
                     Console.WriteLine("Сотрудника с ID = " + id + " в базе нет.");
                 }
             }
-        }
-
-        static string[] GetAllRecords(string fileName)
-        {
-            if (File.Exists(fileName))
-            {
-                return File.ReadAllLines(fileName);
-            }
-            return null;
         }
     }
 }
